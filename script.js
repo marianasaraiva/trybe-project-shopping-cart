@@ -12,7 +12,20 @@ function createCustomElement(element, className, innerText) {
   return e;
 }
 
-function createProductItemElement({ sku, name, image }) {
+// percorrer o array fo fetch products e criar o elemento na createProduitemEleme para cada item
+const fetchObjeto = async () => {
+  const arrayBruto = await fetchProducts();
+  return arrayBruto.map((item) => ({
+      id: item.id,
+      title: item.title,
+      thumbnail: item.thumbnail,
+    }));
+  // console.log(teste);
+};
+// fetchObjeto();
+
+function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
+  const arayObjetoModelo = fetchObjeto();
   const section = document.createElement('section');
   section.className = 'item';
 
