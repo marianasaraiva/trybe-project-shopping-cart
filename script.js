@@ -12,20 +12,7 @@ function createCustomElement(element, className, innerText) {
   return e;
 }
 
-// percorrer o array fo fetch products e criar o elemento na createProduitemEleme para cada item
-const fetchObjeto = async () => {
-  const arrayBruto = await fetchProducts();
-  return arrayBruto.map((item) => ({
-      id: item.id,
-      title: item.title,
-      thumbnail: item.thumbnail,
-    }));
-  // console.log(teste);
-};
-// fetchObjeto();
-
 function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
-  const arayObjetoModelo = fetchObjeto();
   const section = document.createElement('section');
   section.className = 'item';
 
@@ -36,6 +23,16 @@ function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
 
   return section;
 }
+
+const fetchObjeto = async () => {
+  const arrayBruto = await fetchProducts();
+  return arrayBruto.forEach((arr) => {
+    const section = document.querySelector('.items');
+    const result = createProductItemElement(arr);
+    section.appendChild(result);
+  });
+};
+fetchObjeto();
 
 function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;

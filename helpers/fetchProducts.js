@@ -5,8 +5,6 @@ const fetchProducts = (param = 'computador') => {
     .then((data) => data.results);
 };
 
-// console.log(fetchProducts());
-
 if (typeof module !== 'undefined') {  
   module.exports = {
     fetchProducts,
