@@ -13,7 +13,9 @@ function createCustomElement(element, className, innerText) {
 }
 
 function cartItemClickListener(event) {
-  // coloque seu código aqui  // usar quando for deletar os itens do carrinho
+  const ol = document.querySelector('.cart__items');
+    ol.removeChild(event.target);
+  // ol.innerHTML = '';
 }
 
 function getSkuFromProductItem(item) {
@@ -60,4 +62,21 @@ const fetchObjeto = async () => {
 
 window.onload = () => {
   fetchObjeto();
+  cartItemClickListener();
 };
+
+// //lógica do todo List para criar seleção da tarefa por cor ao clicar uma vez
+// olTarefa.addEventListener('click', function (event) {
+//   for (let index = 0; index < liList.length; index += 1) {
+//     liList[index].classList.remove('selected');
+//     event.target.classList.add('selected');
+//   }
+// });
+
+//   //lógica do to do list para apagar elemento clicado
+//   buttonRemoveSinalizados.addEventListener('click', () => {
+//     const tarefaSelecionada = document.querySelectorAll('.selected');
+//     for (let index = 0; index < tarefaSelecionada.length; index += 1) {
+//       olTarefa.removeChild(tarefaSelecionada[index]);
+//     }
+//   });
