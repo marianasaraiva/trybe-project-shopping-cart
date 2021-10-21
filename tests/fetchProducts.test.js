@@ -12,16 +12,16 @@ describe('1 - Teste a função fecthProducts', () => {
   it('2. Testa se a função com argumento e se fetch foi chamada', async () => {
     expect.assertions(1);
     await fetchProducts('computador');
-    expect(fetch).toHaveBeenCalled();
+    expect(fetch).toHaveBeenCalled(); // testado com not deu erro.
   });
   it('3. Teste se, ao chamar a função fetchProducts com o argumento "computador", a função fetch utiliza o endpoint "https://api.mercadolibre.com/sites/MLB/search?q=computador"', async () => {
-  fail('Teste vazio');
+    await fetchProducts('computador');
+    expect(fetch).toHaveBeenCalledWith('https://api.mercadolibre.com/sites/MLB/search?q=computador'); // testado com celular e deu erro.
   });
-  it('4. Teste se o retorno da função fetchProducts com o argumento "computador" é uma estrutura de dados igual ao objeto computadorSearch', () => {
-    fail('Teste vazio');
+  it('4. Teste se o retorno da função fetchProducts com o argumento "computador" é uma estrutura de dados igual ao objeto computadorSearch', async () => {
+    expect(await fetchProducts('computador')).toEqual(computadorSearch); 
   });
-  it('5. Teste se, ao chamar a função fetchProducts sem argumento, retorna um erro com a mensagem: You must provide an url', () => {
-    fail('Teste vazio');
+  it('5. Teste se, ao chamar a função fetchProducts sem argumento, retorna um erro com a mensagem: You must provide an url', async () => {
+    await expect(fetchProducts()).rejects.toEqual(new Error('You must provide an url')); // mudei o nome e deu ruim
   });
-
 });

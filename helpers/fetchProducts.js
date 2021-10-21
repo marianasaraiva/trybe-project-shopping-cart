@@ -1,8 +1,9 @@
-const fetchProducts = (param = 'computador') => {
+const fetchProducts = (param) => {
+  // if (param === undefined) throw new Error('You must provide an url');
   const url = `https://api.mercadolibre.com/sites/MLB/search?q=${param}`;
   return fetch(url)
     .then((response) => response.json())
-    .then((data) => data.results);
+    .then((data) => data);
 };
 
 if (typeof module !== 'undefined') {  
@@ -10,12 +11,3 @@ if (typeof module !== 'undefined') {
     fetchProducts,
   };
 }
-
-  // const result = await fetch(url);
-  // const data = await result.json();
-  // return data.results;
-
-// async function teste(){
-//   const hero = await heroName(url);
-//   console.log(hero);
-// }
