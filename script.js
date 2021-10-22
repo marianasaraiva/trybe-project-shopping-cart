@@ -69,6 +69,12 @@ const fetchObjeto = async () => {
   });
 };
 
+// esvaziar carrinho
+const buttonEsvaziarCarrinho = document.querySelector('.empty-cart');
+buttonEsvaziarCarrinho.addEventListener('click', () => {
+  ol.innerHTML = '';
+});
+
 window.onload = () => {
   fetchObjeto();
   addEvent();
