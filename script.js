@@ -1,3 +1,5 @@
+const ol = document.querySelector('.cart__items');
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -13,10 +15,16 @@ function createCustomElement(element, className, innerText) {
 }
 
 function cartItemClickListener(event) {
-  const ol = document.querySelector('.cart__items');
-    ol.removeChild(event.target);
-  // ol.innerHTML = '';
+  ol.removeChild(event.target);
+  saveCartItems(ol.innerHTML);
 }
+
+const addEvent = () => {
+  ol.innerHTML = getSavedCartItems();
+  // tratando a localStorageLi
+  const localStorageLi = document.querySelectorAll('.cart__item');
+  localStorageLi.forEach((val) => val.addEventListener('click', cartItemClickListener));
+};
 
 function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
@@ -33,9 +41,10 @@ function createCartItemElement({ id: sku, title: name, price: salePrice }) {
 async function itemCarrinho(event) {
   const buscaSKU = getSkuFromProductItem(event.target.parentNode);
   const arrayBruto = await fetchItem(buscaSKU);
-  const ol = document.querySelector('.cart__items');
   const carrinho = createCartItemElement(arrayBruto);
   ol.appendChild(carrinho);
+  // forma de salvar o 
+  saveCartItems(ol.innerHTML);
 }
 
 function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
@@ -47,7 +56,6 @@ function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
   section.appendChild(createCustomElement('span', 'item__title', name));
   section.appendChild(createProductImageElement(image));
   section.appendChild(button);
-
   return section;
 }
 
@@ -62,21 +70,5 @@ const fetchObjeto = async () => {
 
 window.onload = () => {
   fetchObjeto();
-  cartItemClickListener();
+  addEvent();
 };
-
-// //lógica do todo List para criar seleção da tarefa por cor ao clicar uma vez
-// olTarefa.addEventListener('click', function (event) {
-//   for (let index = 0; index < liList.length; index += 1) {
-//     liList[index].classList.remove('selected');
-//     event.target.classList.add('selected');
-//   }
-// });
-
-//   //lógica do to do list para apagar elemento clicado
-//   buttonRemoveSinalizados.addEventListener('click', () => {
-//     const tarefaSelecionada = document.querySelectorAll('.selected');
-//     for (let index = 0; index < tarefaSelecionada.length; index += 1) {
-//       olTarefa.removeChild(tarefaSelecionada[index]);
-//     }
-//   });
