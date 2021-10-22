@@ -16,14 +16,15 @@ function createCustomElement(element, className, innerText) {
 
 function cartItemClickListener(event) {
   ol.removeChild(event.target);
-  saveCartItems(ol.innerHTML);
+  // saveCartItems(ol.innerHTML); // ???
+  // ol.innerHTML = '';
 }
 
 const addEvent = () => {
   ol.innerHTML = getSavedCartItems();
   // tratando a localStorageLi
   const localStorageLi = document.querySelectorAll('.cart__item');
-  localStorageLi.forEach((val) => val.addEventListener('click', cartItemClickListener));
+  localStorageLi.forEach((item) => item.addEventListener('click', cartItemClickListener));
 };
 
 function getSkuFromProductItem(item) {
@@ -43,7 +44,7 @@ async function itemCarrinho(event) {
   const arrayBruto = await fetchItem(buscaSKU);
   const carrinho = createCartItemElement(arrayBruto);
   ol.appendChild(carrinho);
-  // forma de salvar o 
+  // forma de salvar os itens no carrinho.
   saveCartItems(ol.innerHTML);
 }
 
