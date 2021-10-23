@@ -1,4 +1,6 @@
+const buttonEsvaziarCarrinho = document.querySelector('.empty-cart');
 const ol = document.querySelector('.cart__items');
+const sectionPrincipal = document.querySelector('.cart');
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -14,13 +16,22 @@ function createCustomElement(element, className, innerText) {
   return e;
 }
 
-function cartItemClickListener(event) {
-  ol.removeChild(event.target);
-  // saveCartItems(ol.innerHTML); // ???
-  // ol.innerHTML = '';
+const array = [];
+function somaCarrinho(param) {
+  const price = document.querySelector('.total-price');
+  array.push(param);
+  const total = Number(array.reduce((sum, item) => sum + item));
+  price.innerText = `Preço: ${total.toFixed(2)}`;
+  sectionPrincipal.appendChild(price);
 }
 
-const addEvent = () => {
+function cartItemClickListener(event) {
+  ol.removeChild(event.target);
+  // salvar o item ao recarregar a página no localStorage
+  saveCartItems(ol.innerHTML);
+}
+
+const adicionaEvento = () => {
   ol.innerHTML = getSavedCartItems();
   // tratando a localStorageLi
   const localStorageLi = document.querySelectorAll('.cart__item');
@@ -36,6 +47,7 @@ function createCartItemElement({ id: sku, title: name, price: salePrice }) {
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
+  somaCarrinho(salePrice);
   return li;
 }
 
@@ -69,13 +81,13 @@ const fetchObjeto = async () => {
   });
 };
 
-// esvaziar carrinho
-const buttonEsvaziarCarrinho = document.querySelector('.empty-cart');
+// esvaziar carrinho com button
 buttonEsvaziarCarrinho.addEventListener('click', () => {
   ol.innerHTML = '';
+  saveCartItems(ol.innerHTML);
 });
 
 window.onload = () => {
   fetchObjeto();
-  addEvent();
+  adicionaEvento();
 };
