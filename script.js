@@ -1,6 +1,7 @@
 const buttonEsvaziarCarrinho = document.querySelector('.empty-cart');
 const ol = document.querySelector('.cart__items');
 const sectionPrincipal = document.querySelector('.cart');
+const sectionLoadingPai = document.querySelector('.clear-loading');
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -15,6 +16,10 @@ function createCustomElement(element, className, innerText) {
   e.innerText = innerText;
   return e;
 }
+
+const loading = () => {
+  sectionLoadingPai.innerHTML = '';
+};
 
 const array = [];
 function somaCarrinho(param) {
@@ -69,6 +74,7 @@ function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
   section.appendChild(createCustomElement('span', 'item__title', name));
   section.appendChild(createProductImageElement(image));
   section.appendChild(button);
+  loading();
   return section;
 }
 
