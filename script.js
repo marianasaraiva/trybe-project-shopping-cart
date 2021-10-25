@@ -1,7 +1,7 @@
 const buttonEsvaziarCarrinho = document.querySelector('.empty-cart');
 const ol = document.querySelector('.cart__items');
-const sectionPrincipal = document.querySelector('.cart');
 const sectionLoadingPai = document.querySelector('.clear-loading');
+const price = document.querySelector('.total-price');
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -21,16 +21,21 @@ const loading = () => {
   sectionLoadingPai.innerHTML = '';
 };
 
-const array = [];
+let soma = 0;
 function somaCarrinho(param) {
-  const price = document.querySelector('.total-price');
-  array.push(param);
-  const total = Number(array.reduce((sum, item) => sum + item));
-  price.innerText = `Preço: ${total.toFixed(2)}`;
-  sectionPrincipal.appendChild(price);
+  soma += param;
+  price.innerText = soma;
 }
 
+const subtrair = (valorProduto) => {
+  // soma -= valorProduto;
+  price.innerText -= valorProduto;
+};
+
 function cartItemClickListener(event) {
+  const alvo = event.target.innerText;
+  const valor = Number(alvo.split('PRICE: $')[1]);
+  subtrair(valor);
   ol.removeChild(event.target);
   // salvar o item ao recarregar a página no localStorage
   saveCartItems(ol.innerHTML);
@@ -90,6 +95,7 @@ const fetchObjeto = async () => {
 // esvaziar carrinho com button
 buttonEsvaziarCarrinho.addEventListener('click', () => {
   ol.innerHTML = '';
+  price.innerText = 0;
   saveCartItems(ol.innerHTML);
 });
 
