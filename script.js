@@ -28,8 +28,8 @@ function somaCarrinho(param) {
 }
 
 const subtrair = (valorProduto) => {
-  // soma -= valorProduto;
-  price.innerText -= valorProduto;
+  soma -= valorProduto;
+  price.innerText = soma;
 };
 
 function cartItemClickListener(event) {
