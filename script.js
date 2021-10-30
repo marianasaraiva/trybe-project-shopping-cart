@@ -24,12 +24,12 @@ const loading = () => {
 let soma = 0;
 function somaCarrinho(param) {
   soma += param;
-  price.innerText = `Total: R$${soma}`;
+  price.innerText = soma;
 }
 
 const subtrair = (valorProduto) => {
   soma -= valorProduto;
-  price.innerText = `Total: R$${soma}`;
+  price.innerText = soma;
 };
 
 function cartItemClickListener(event) {
