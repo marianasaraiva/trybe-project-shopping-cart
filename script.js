@@ -24,12 +24,12 @@ const loading = () => {
 let soma = 0;
 function somaCarrinho(param) {
   soma += param;
-  price.innerText = soma;
+  price.innerText = `Total: R$${soma}`;
 }
 
 const subtrair = (valorProduto) => {
   soma -= valorProduto;
-  price.innerText = soma;
+  price.innerText = `Total: R$${soma}`;
 };
 
 function cartItemClickListener(event) {
@@ -92,7 +92,6 @@ const fetchObjeto = async () => {
   });
 };
 
-// esvaziar carrinho com button
 buttonEsvaziarCarrinho.addEventListener('click', () => {
   ol.innerHTML = '';
   price.innerText = 0;
