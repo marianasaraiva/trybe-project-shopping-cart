@@ -21,3 +21,8 @@ Projeto desenvolvido no bloco 9 de Fundamentos de Desenvolvimento Web.
 1. Abrir o arquivo index.html com um navegador ou;
 
 2. Acesse pelo link GitPages: https://marianasaraiva.github.io/trybe-project-shopping-cart/
+
+## Gif do projeto:
+<p align="center">
+  <img  src="https://github.com/marianasaraiva/trybe-project-shopping-cart/blob/main/Shopping_cart.gif" alt="Shopping Cart Gif"/>
+</p>
